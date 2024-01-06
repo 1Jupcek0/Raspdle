@@ -58,7 +58,7 @@
             .gameBtn{
                 width:40vh;
                 height:10vh;
-                background-color:rgb(77, 77, 77);
+                background-color:grey;
                 margin-left: 5vh;
                 margin-top: 10vh;
                 border-radius: 25px;
@@ -75,14 +75,26 @@
                 top: -4vh;
                 color: white;
             }
+            form{
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+                padding-top:0px;
+                margin-block-end: 0em;
+            }
         </style>
     <style type="text/css" id="operaUserStyle"></style><link id="operaalerabat-link" rel="stylesheet" type="text/css" href="chrome-extension://eplcjggklbefnipglcfdfalbbjpmkbkl/content.css"></head>
     <body>
         <p class="headlineText">Rasp &nbsp;&nbsp;&nbsp;&nbsp; dle</p>
         <div class="mainLogo"></div>
         <main>
-            <button class="gameBtn"><p class="textos">Spec guessing</p></button>
-            <button class="gameBtn"><p class="textos">Photo guessing</p></button>
+            <form action="./Spec.php" method="POST" autocomplete="off">
+                <button class="gameBtn"><p class="textos">Spec guessing</p></button>
+            </form>
+            <form action="./Photo.php" method="POST" autocomplete="off">
+                <button class="gameBtn"><p class="textos">Photo guessing</p></button>
+            </form>
             <button class="gameBtn"></button>
         </main>
     </body>

@@ -46,6 +46,11 @@
                 background-position: center;
                 background-size: cover;
                 background-attachment: fixed;
+                -webkit-background-clip: text;
+                font-family: 'Nunito', sans-serif;
+            }
+            body::-webkit-scrollbar {
+                display: none;
             }
             .headlineText{
                 -webkit-user-select:none;
@@ -73,12 +78,11 @@
                 font-family: 'Nunito', sans-serif;
             }
             main{
-                visibility: hidden;
                 position:absolute;
-                width:100vh;
-                height:10vh;
-                margin-left:50vh;
-                margin-top: 50vh;
+                width:78vh;
+                height: fit-content;
+                margin-left:60vh;
+                margin-top: 55vh;
                 background: linear-gradient(to right, red, purple,yellow) border-box;
                 border-radius: 25px;
                 border: 10px solid transparent;
@@ -90,9 +94,9 @@
                 position: absolute;
                 background-color: grey;
                 height: 10vh;
-                width: 35vh;
+                width: 50vh;
                 margin-top: 25vh;
-                margin-left: 83vh;
+                margin-left: 74vh;
                 border: 5px white solid ;
                 border-radius: 5px;
             }
@@ -101,9 +105,19 @@
                 height: 7vh;
                 width: 40vh;
                 margin-top: 5vh;
-                margin-left: -3vh;
-                border: 5px grey solid ;
+                margin-left: -1vh;
+                border: 5px white solid ;
                 border-radius: 5px;
+            }
+            .mainFormSubmitCircle{
+                width: 7vh;
+                height: 7vh;
+                border-radius: 50%;
+                margin-top: -7.5vh;
+                margin-left: 42vh;
+                background-color: grey;
+                cursor:pointer;
+                border: 3px white solid;
             }
             .mainFormSubmitInput{
                 width: 40vh;
@@ -137,6 +151,51 @@
                 font-size: 3vh;
                 color: white;
             }
+            button{
+                border:none;
+            }
+            .holdPI{
+                width: 74vh;
+                height: 11vh;
+                margin-left: 2vh;
+                margin-top: 3vh;
+                padding: 0px;
+            }
+            .thingPI{
+                width: 10vh;
+                height: 10vh;
+                background-color: grey;
+                border-radius: 5%;
+                float: left;
+                margin-left: 2vh;
+            }
+            .innerPIText{
+                text-shadow: 1px 1px 4px black ;
+                color: white;
+                font-size: 3vh;
+                text-align: center;
+                margin-top:3vh;
+            }
+            .s{
+                font-size: 2vh;
+                margin-top: 2.5vh;
+            }
+            .ts{
+                margin-top: -2vh;;
+                height: 3vh;
+                background-color: rgba(0,0,0,0);
+            }
+            .tss{
+                margin-top: 0vh;
+                border-bottom: solid 5px white;
+                border-radius: 4em;
+            }
+            .hs{
+                height: .2vh;
+            }
+            .is{
+                margin-top: 3.5vh;
+            }
         </style>
     <body>
         <p class="headlineText">Rasp &nbsp;&nbsp;&nbsp;&nbsp; dle</p>
@@ -147,10 +206,32 @@
                 <div class="mainFormSubmitDiv">
                     <input id="myInput" type="text" class="mainFormSubmitInput" placeholder="Type RPI Type" name="RPITYPE">
                 </div>
+                <button class="mainFormSubmitCircle" id="buttonPostKys"><p style="color:white;-webkit-user-select:none;
+                -moz-user-select:none; font-size:5vh; margin-left:1vh; margin-top:-0.5vh;">&#62;</p></button>
             </form>
         </div>
         <main>
-            
+            <div class="holdPI hs">
+                <div class="thingPI ts"><p class="innerPIText tss s">Name</p></div>
+                <div class="thingPI ts"><p class="innerPIText tss s">Generation</p></div>
+                <div class="thingPI ts"><p class="innerPIText tss s">Date</p></div>
+                <div class="thingPI ts"><p class="innerPIText tss s">Price</p></div>
+                <div class="thingPI ts"><p class="innerPIText tss s">USB 2</p></div>
+                <div class="thingPI ts"><p class="innerPIText tss s">Weight</p></div>
+            </div>
+            <!-- asdhfjasdhjfkhasdkfhaskdhfasdhfahsjkfhakshfkashdfjahsdljkdfdhaskjfhaskjdhfkjashfkjsahfdjhsaklfjhsj-->
+            <div class="holdPI">
+                <div class="thingPI"><p class="innerPIText s is">RPI 1A+</p></div>
+                <div class="thingPI"><p class="innerPIText">1+</p></div>
+                <div class="thingPI"><p class="innerPIText s">prosinec&#13;2012</p></div>
+                <div class="thingPI"><p class="innerPIText">12 $</p></div>
+                <div class="thingPI"><p class="innerPIText">1</p></div>
+                <div class="thingPI"><p class="innerPIText">12 g</p></div>
+            </div>
+
+
+
+
         </main>
     </body>
 
@@ -266,6 +347,14 @@
             
             /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
             autocomplete(document.getElementById("myInput"), countries);
+
+            // button nn post 
+            document.getElementById("buttonPostKys").addEventListener("click",function (e) {
+                if(countries.includes(document.getElementById("myInput").value)){
+                    return;
+                }
+                e.preventDefault();
+            });
             </script>
     </body>
 </html>
