@@ -82,7 +82,7 @@
                 width:78vh;
                 height: fit-content;
                 margin-left:60vh;
-                margin-top: 55vh;
+                margin-top: 50vh;
                 background: linear-gradient(to right, red, purple,yellow) border-box;
                 border-radius: 25px;
                 border: 10px solid transparent;
@@ -93,23 +93,26 @@
             .infobg{
                 position: absolute;
                 background-color: grey;
-                height: 10vh;
+                height: 5vh;
                 width: 50vh;
                 margin-top: 25vh;
                 margin-left: 74vh;
                 border: 5px white solid ;
                 border-radius: 5px;
+                visibility:hidden;
             }
             .mainFormSubmitDiv{
+                visibility: visible;
                 background-color: grey;
                 height: 7vh;
-                width: 40vh;
+                width: 25vh;
                 margin-top: 5vh;
-                margin-left: -1vh;
+                margin-left: 13vh;
                 border: 5px white solid ;
                 border-radius: 5px;
             }
             .mainFormSubmitCircle{
+                visibility: visible;
                 width: 7vh;
                 height: 7vh;
                 border-radius: 50%;
@@ -120,7 +123,8 @@
                 border: 3px white solid;
             }
             .mainFormSubmitInput{
-                width: 40vh;
+                visibility: visible;
+                width: 25vh;
                 height: 7vh;
                 border: 5px grey solid ;
                 border-radius: 5px;
@@ -148,7 +152,7 @@
                 -moz-user-select:none;
                 */
                 position:relative;
-                font-size: 3vh;
+                font-size: 2vh;
                 color: white;
             }
             button{
@@ -198,41 +202,93 @@
             }
         </style>
     <body>
+        <?php 
+            $mainBody = "";
+            $index = 0;
+            $translate = [
+                "PI 1 A" => "1", 
+                "PI 1 A+" => "2", 
+                "PI 1 B" => "3",
+                "PI 1 B+" => "4", 
+                "PI 2 B" => "5", 
+                "PI 3 B" => "6", 
+                "PI 3 B+" => "7", 
+                "PI 4 B" => "8",
+                "PI 1.2" => "9",
+                "PI 1.3" => "10",
+                "PI W" => "11",
+            ];
+            
+            if ($_SERVER["REQUEST_METHOD"] == "POST"){
+                if(!$index){
+                    $myfile = fopen("currentIndex.txt", "w") or die("Unable to open file! 001");
+                    $index = rand(1,11);
+                    fwrite($myfile,$index);
+                    fclose($myfile);
+                }
+                if(!empty($_POST["imputer"])){
+                    $myfile = fopen("historyPI.txt","r") or die("Unable to open file!");
+                    $jorn = true;
+                    $all = "";
+                    while(!feof($myfile)){
+                        $content = fgets($myfile);
+                        if($content == $translate[$_POST["imputer"]]) {
+                            $jorn = false;
+                        }
+                        $all = $all . $content;
+                    }
+                    fclose($myfile);
+                    if($jorn){
+                        $myfile = fopen("historyPI.txt","w") or die("Unable to open file!");
+                        fwrite($myfile, $translate[$_POST["imputer"]] . "\n" . $all);
+                        fclose($myfile);
+                    }
+                }
+                $myfile = fopen("historyPI.txt","r") or die("Unable to open file! 000");
+                if(!feof($myfile) && filesize("historyPI.txt") != 0){
+                    
+                    $mainBody = "<main><div class=\"holdPI hs\"><div class=\"thingPI ts\"><p class=\"innerPIText tss s\">Name</p></div><div class=\"thingPI ts\"><p class=\"innerPIText tss s\">Model</p></div><div class=\"thingPI ts\"><p class=\"innerPIText tss s\">Date</p></div><div class=\"thingPI ts\"><p class=\"innerPIText tss s\">Price</p></div><div class=\"thingPI ts\"><p class=\"innerPIText tss s\">USB 2</p></div><div class=\"thingPI ts\"><p class=\"innerPIText tss s\">Weight</p></div></div>";
+                    while(!feof($myfile)) {
+                        $findex = fgets($myfile);
+                        if(!$findex) break;
+                        $ffile = fopen((int)$findex . ".txt","r") or die("Unable to open file! 002");
+                        
+                        $farray = [];
+                        while(!feof($ffile)){
+                            array_push($farray, fgets($ffile));
+                        }
+                        $mainBody = $mainBody . "<div class=\"holdPI\"><div class=\"thingPI\" style=\"background-color:red;\"><p class=\"innerPIText s is\">" . $farray[0] . "</p></div><div class=\"thingPI\" style=\"background-color:green;\"><p class=\"innerPIText\">" . $farray[1] . "</p></div><div class=\"thingPI\"><p class=\"innerPIText s\">" . $farray[2] . "</p></div><div class=\"thingPI\"><p class=\"innerPIText\">" . $farray[3] ."</p></div><div class=\"thingPI\"><p class=\"innerPIText\">" . $farray[4] . "</p></div><div class=\"thingPI\"><p class=\"innerPIText\">" . $farray[5] . "</p></div>
+            </div>";
+                        fclose($ffile);
+                    }
+                    
+                    $mainBody = $mainBody . "</main>";
+                }
+                fclose($myfile);
+                
+            }
+        ?>
+    </body>
+        
+        
+    <body>
         <p class="headlineText">Rasp &nbsp;&nbsp;&nbsp;&nbsp; dle</p>
         <div class="mainLogo"></div>
         <div class="infobg">
-            <p class="textos" style="text-align: center;">Guess RPI type</p> 
             <form action="./Spec.php" method="POST" autocomplete="off">
+                <button class="mainFormSubmitCircle " id="buttonNew" style="position:absolute; margin-left:3vh; margin-top:.5vh;"><p style="color:white;-webkit-user-select:none;
+                -moz-user-select:none; font-size:2.5vh; margin-left:1vh; margin-top:1vh; margin-left:-.05vh;">new</p>
+                </button>
                 <div class="mainFormSubmitDiv">
-                    <input id="myInput" type="text" class="mainFormSubmitInput" placeholder="Type RPI Type" name="RPITYPE">
+                    <input id="myInput" type="text" class="mainFormSubmitInput" placeholder="Guess RPI Type" name="imputer">
                 </div>
                 <button class="mainFormSubmitCircle" id="buttonPostKys"><p style="color:white;-webkit-user-select:none;
-                -moz-user-select:none; font-size:5vh; margin-left:1vh; margin-top:-0.5vh;">&#62;</p></button>
+                -moz-user-select:none; font-size:5vh; margin-left:1vh; margin-top:-.5vh; margin-left:.1vh;">&#62;</p>
+                </button>
             </form>
         </div>
-        <main>
-            <div class="holdPI hs">
-                <div class="thingPI ts"><p class="innerPIText tss s">Name</p></div>
-                <div class="thingPI ts"><p class="innerPIText tss s">Generation</p></div>
-                <div class="thingPI ts"><p class="innerPIText tss s">Date</p></div>
-                <div class="thingPI ts"><p class="innerPIText tss s">Price</p></div>
-                <div class="thingPI ts"><p class="innerPIText tss s">USB 2</p></div>
-                <div class="thingPI ts"><p class="innerPIText tss s">Weight</p></div>
-            </div>
-            <!-- asdhfjasdhjfkhasdkfhaskdhfasdhfahsjkfhakshfkashdfjahsdljkdfdhaskjfhaskjdhfkjashfkjsahfdjhsaklfjhsj-->
-            <div class="holdPI">
-                <div class="thingPI"><p class="innerPIText s is">RPI 1A+</p></div>
-                <div class="thingPI"><p class="innerPIText">1+</p></div>
-                <div class="thingPI"><p class="innerPIText s">prosinec&#13;2012</p></div>
-                <div class="thingPI"><p class="innerPIText">12 $</p></div>
-                <div class="thingPI"><p class="innerPIText">1</p></div>
-                <div class="thingPI"><p class="innerPIText">12 g</p></div>
-            </div>
+        <?php echo $mainBody;?>
 
-
-
-
-        </main>
     </body>
 
 
@@ -343,7 +399,7 @@
             }
             
             /*An array containing all the country names in the world:*/
-            var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts & Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia","Turkey","Turkmenistan","Turks & Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
+            var countries = ["PI 1 A", "PI 1 A+", "PI 1 B", "PI 1 B+", "PI 2 B", "PI 3 B", "PI 3 B+", "PI 4 B", "PI 1.2", "PI 1.3", "PI W"];
             
             /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
             autocomplete(document.getElementById("myInput"), countries);
