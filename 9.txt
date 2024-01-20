@@ -1,6 +1,0 @@
-PI 1.2
-ZERO
-listopad 2015
-5 $
-1
-9g

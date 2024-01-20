@@ -9,61 +9,61 @@
                 margin:0;
                 width:99.9%;
                 height:99.9%;
-                background-image: url("./bg.jpg");
+                background-image: url("./pics/bg.jpg");
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: cover;
                 background-attachment: fixed;
             }
             .headlineText{
+                width:65vh;
+                height:10vh;
+                background-color:blue;
                 -webkit-user-select:none;
                 -moz-user-select:none;
                 user-select:none;
-                position:absolute;
                 color:white;
                 font-size:13vh;
-                margin-left:66vh;
-                margin-top:3vh;
+                margin:auto;
             }
             .mainLogo{
-                position:absolute;
                 width: 12vh;
                 height: 15vh;
-                background-image: url("./rpiLogo.png");
+                background-image: url("./pics/rpiLogo.png");
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: cover;
-                margin-top:5vh;
-                margin-left:100vh;
+                margin-left: 103.5vh;
+                margin-top:-7vh;
             }
             p{
                 -webkit-background-clip: text;
                 font-family: 'Nunito', sans-serif;
             }
             main{
-                position:absolute;
                 width:50vh;
                 height:70vh;
-                background-color:black;
-                margin-left:75vh;
-                margin-top:23vh;
-                background: url("./bgbg.png") padding-box,
-                linear-gradient(to right, red, purple,yellow) border-box;
-                border-radius: 25px;
-                border: 10px solid transparent;
+                background-color: rgb(3,124,89);
+                margin:auto;
+                margin-top:5vh;
                 
+                border-radius: 3vh;
+                border: 1vh solid white;
+                
+                background-image: url("./pics/bgbg.png");
                 background-repeat: no-repeat;
                 background-position: center;
+                background-size: 47vh;
             }
             .gameBtn{
                 width:40vh;
                 height:10vh;
-                background-color:grey;
+                background-color: grey;
                 margin-left: 5vh;
                 margin-top: 10vh;
-                border-radius: 25px;
+                border-radius: 3vh;
                 border-style: solid;
-                border-width:5px;
+                border-width: .5vh;
                 border-color: rgb(255, 255, 255);
                 cursor: pointer;
             }
@@ -86,16 +86,18 @@
         </style>
     <style type="text/css" id="operaUserStyle"></style><link id="operaalerabat-link" rel="stylesheet" type="text/css" href="chrome-extension://eplcjggklbefnipglcfdfalbbjpmkbkl/content.css"></head>
     <body>
-        <p class="headlineText">Rasp &nbsp;&nbsp;&nbsp;&nbsp; dle</p>
+        <p class="headlineText">Rasp &nbsp;&nbsp;&nbsp; dle</p>
         <div class="mainLogo"></div>
         <main>
-            <form action="./Spec.php" method="POST" autocomplete="off">
-                <button class="gameBtn"><p class="textos">Spec guessing</p></button>
+            <form action="./Specifications.php" method="POST" autocomplete="off">
+                <button class="gameBtn"><p class="textos">Specifications</p></button>
             </form>
-            <form action="./Photo.php" method="POST" autocomplete="off">
-                <button class="gameBtn"><p class="textos">Photo guessing</p></button>
+            <form action="./Photos.php" method="POST" autocomplete="off">
+                <button class="gameBtn"><p class="textos">Photos</p></button>
             </form>
-            <button class="gameBtn"></button>
+            <form action="https://github.com/1Jupcek0/Raspdle" method="POST" autocomplete="off" target="_blank">
+                <button class="gameBtn"><p class="textos">Github</p></button>
+            </form>
         </main>
     </body>
 </html>
