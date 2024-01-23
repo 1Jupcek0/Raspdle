@@ -25,16 +25,24 @@
 
 ## 
 
-[![Product Name Screen Shot][product-screenshot]](https://raspdle.000webhostapp.com/)  
+<div align="center">
+  <img src="pics/screenshot.png">
+</div>
 
-### Built With
+## Built With
 
-
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+<a href="https://html.com">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+</a>
+<br>
+<a href="https://en.wikipedia.org/wiki/CSS">
+  <img src="https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white">
+</a>
+<br>
+<a href="https://www.javascript.com">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+</a>
+<br>
+<a href="https://www.php.net">
+  <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white">
+</a>
