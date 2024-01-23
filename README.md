@@ -1,6 +1,5 @@
 # Raspdle
 
-<!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/1Jucepk0/Raspdle">
